@@ -53,7 +53,7 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
             <a href="/" className="flex items-center gap-2.5">
               <div className="w-7 h-7 bg-brand-600 rounded-lg flex items-center justify-center shrink-0">
-                <span className="text-white font-bold text-xs">UT</span>
+                <span className="text-white font-bold text-xs">EB</span>
               </div>
               <span className="font-semibold text-gray-900 text-sm">El Bosque Transparente</span>
             </a>
