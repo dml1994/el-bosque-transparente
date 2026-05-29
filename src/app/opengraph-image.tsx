@@ -69,7 +69,7 @@ export default function OgImage() {
               fontSize: 22,
             }}
           >
-            UT
+            EB
           </div>
           <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 28, fontWeight: 600 }}>
             El Bosque Transparente
