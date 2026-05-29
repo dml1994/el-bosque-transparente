@@ -8,9 +8,9 @@ export const metadata: Metadata = {
     template: "%s | El Bosque Transparente",
   },
   description:
-    "Portal de transparencia del Ayuntamiento de Ubrique (Cádiz). Consulta contratos públicos, retribuciones de cargos electos y presupuestos municipales con datos oficiales actualizados.",
+    "Portal de transparencia del Ayuntamiento de El Bosque (Cádiz). Consulta contratos públicos, retribuciones de cargos electos y presupuestos municipales con datos oficiales actualizados.",
   keywords: [
-    "transparencia", "ubrique", "ayuntamiento", "contratos públicos",
+    "transparencia", "el bosque", "ayuntamiento", "contratos públicos",
     "presupuesto municipal", "sueldos concejales", "cádiz", "andalucía",
     "plataforma contratación", "datos abiertos",
   ],
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     siteName: "El Bosque Transparente",
     title: "El Bosque Transparente — Transparencia municipal",
     description:
-      "Contratos públicos, sueldos de cargos y presupuestos del Ayuntamiento de Ubrique. Datos oficiales actualizados diariamente.",
+      "Contratos públicos, sueldos de cargos y presupuestos del Ayuntamiento de El Bosque. Datos oficiales actualizados diariamente.",
   },
   twitter: {
     card: "summary_large_image",
     title: "El Bosque Transparente",
     description:
-      "Contratos públicos, sueldos y presupuestos del Ayuntamiento de Ubrique.",
+      "Contratos públicos, sueldos y presupuestos del Ayuntamiento de El Bosque.",
   },
   robots: {
     index: true,

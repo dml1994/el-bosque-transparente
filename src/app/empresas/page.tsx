@@ -4,11 +4,11 @@ export const revalidate = 3600;
 export const metadata = {
   title: "Empresas adjudicatarias",
   description:
-    "Ranking de empresas que más contratos han recibido del Ayuntamiento de Ubrique, con importes totales y número de contratos.",
+    "Ranking de empresas que más contratos han recibido del Ayuntamiento de El Bosque, con importes totales y número de contratos.",
   alternates: { canonical: "https://el-bosque-transparente.vercel.app/empresas" },
   openGraph: {
     title: "Empresas adjudicatarias — El Bosque Transparente",
-    description: "Qué empresas reciben más contratos del Ayuntamiento de Ubrique y por qué importe.",
+    description: "Qué empresas reciben más contratos del Ayuntamiento de El Bosque y por qué importe.",
     url: "https://el-bosque-transparente.vercel.app/empresas",
   },
 };
@@ -38,7 +38,7 @@ export default async function EmpresasPage({ searchParams }: PageProps) {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Empresas adjudicatarias</h1>
         <p className="text-sm text-gray-500 mt-1">
-          Ordenadas por importe total recibido del Ayuntamiento de Ubrique.
+          Ordenadas por importe total recibido del Ayuntamiento de El Bosque.
         </p>
       </div>
 

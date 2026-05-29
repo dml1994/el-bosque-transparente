@@ -4,11 +4,11 @@ export const revalidate = 3600; // 1 hora en CDN
 export const metadata = {
   title: "Contratos públicos",
   description:
-    "Consulta todos los contratos públicos del Ayuntamiento de Ubrique. Datos de la Plataforma de Contratación del Sector Público, actualizados diariamente.",
+    "Consulta todos los contratos públicos del Ayuntamiento de El Bosque. Datos de la Plataforma de Contratación del Sector Público, actualizados diariamente.",
   alternates: { canonical: "https://el-bosque-transparente.vercel.app/contratos" },
   openGraph: {
     title: "Contratos públicos — El Bosque Transparente",
-    description: "Contratos del Ayuntamiento de Ubrique con importes, adjudicatarias y fechas. Fuente oficial PCSP.",
+    description: "Contratos del Ayuntamiento de El Bosque con importes, adjudicatarias y fechas. Fuente oficial PCSP.",
     url: "https://el-bosque-transparente.vercel.app/contratos",
   },
 };

@@ -11,17 +11,17 @@ const jsonLd = {
   name: "El Bosque Transparente",
   url: "https://el-bosque-transparente.vercel.app",
   description:
-    "Portal de transparencia del Ayuntamiento de Ubrique con datos de contratos, sueldos y presupuesto.",
+    "Portal de transparencia del Ayuntamiento de El Bosque con datos de contratos, sueldos y presupuesto.",
   about: {
     "@type": "GovernmentOrganization",
-    name: "Ayuntamiento de Ubrique",
-    url: "https://www.ubrique.es",
+    name: "Ayuntamiento de El Bosque",
+    url: "https://www.elbosque.es",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Ubrique",
+      addressLocality: "El Bosque",
       addressRegion: "Cádiz",
       addressCountry: "ES",
-      postalCode: "11600",
+      postalCode: "11670",
     },
   },
 };
@@ -114,7 +114,7 @@ export default async function HomePage() {
         <div className="relative z-10">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">El Bosque Transparente</h1>
           <p className="text-brand-200 mt-2">
-            Contratos, sueldos y presupuestos del Ayuntamiento de Ubrique.
+            Contratos, sueldos y presupuestos del Ayuntamiento de El Bosque.
           </p>
         </div>
       </section>
