@@ -1,5 +1,5 @@
 """
-Carga retribuciones de cargos electos de Ubrique desde los ficheros ISPA
+Carga retribuciones de cargos electos de El Bosque desde los ficheros ISPA
 (Información Salarial de Puestos de la Administración) del Ministerio de HACIENDA.
 
 Fuente: ISPA 2024 (datos retribuciones año 2023)
@@ -32,7 +32,7 @@ from db import get_conn  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-MUNICIPALITY = "Ubrique"
+MUNICIPALITY = "El Bosque"
 
 ISPA_EDITIONS = {
     2023: {
@@ -49,18 +49,20 @@ ISPA_EDITIONS = {
     },
 }
 
-# Nombres de cargos del mandato 2023-2027 (fuente: web ayuntamientoubrique.es)
+# Nombres de cargos del mandato 2023-2027 (fuente: ayto-elbosque.es)
+# Alcalde: Rubén Corrales Corbacho (PP, mayoría)
+# PP concejales delegados: Alicia León Manzano, Lucía Rodríguez Román,
+#   David España Ruiz, Antonio Ramírez Castro, Beatriz Salguero Pérez
+# PSOE (4) y AxSí (1): oposición, sin dedicación retribuida presumiblemente
+# Régimen de dedicación definitivo lo determina el propio ISPA al parsear.
 COUNCIL_2023 = {
-    "alcalde": "José Mario Casillas Ardila",
-    "1er_teniente": "José Antonio Bautista Piña",
-    "2a_teniente": "Mariana Moreno Gil",
-    "3er_teniente": "Daniel Domínguez Chaves",
-    "4o_teniente": "Francisco de Asís Gil Ramírez",
+    "alcalde": "Rubén Corrales Corbacho",
+    "1er_teniente": "Alicia León Manzano",
+    "2a_teniente": "Lucía Rodríguez Román",
+    "3er_teniente": "David España Ruiz",
+    "4o_teniente": "Antonio Ramírez Castro",
     "concejal_delegado": [
-        "Rocío Pazo Gómez",
-        "José Gabriel Calvente Nieto",
-        "Patricia Caro Carrasco",
-        "Alba María Gil Herrera",
+        "Beatriz Salguero Pérez",
     ],
 }
 
@@ -76,7 +78,7 @@ def download_xlsx(url: str) -> bytes:
         return r.read()
 
 
-def parse_ubrique_rows(xlsx_bytes: bytes, sheet_name: str = "Hoja1") -> list:
+def parse_el_bosque_rows(xlsx_bytes: bytes, sheet_name: str = "Hoja1") -> list:
     try:
         import openpyxl
     except ImportError:
@@ -304,8 +306,8 @@ def run(years: Optional[List[int]] = None):
             log.error("Error descargando ficheros ISPA para %d: %s", year, e)
             continue
 
-        alcalde_rows = parse_ubrique_rows(alcalde_bytes)
-        concejal_rows = parse_ubrique_rows(concejal_bytes)
+        alcalde_rows = parse_el_bosque_rows(alcalde_bytes)
+        concejal_rows = parse_el_bosque_rows(concejal_bytes)
         log.info("  Alcalde: %d filas, Concejales: %d filas", len(alcalde_rows), len(concejal_rows))
 
         if year == 2023:
@@ -321,7 +323,7 @@ def run(years: Optional[List[int]] = None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Carga retribuciones ISPA de Ubrique")
+    parser = argparse.ArgumentParser(description="Carga retribuciones ISPA de El Bosque")
     parser.add_argument("--year", nargs="+", type=int, default=None,
                         help="Años a cargar (por defecto: todos disponibles)")
     args = parser.parse_args()
