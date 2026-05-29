@@ -1,4 +1,4 @@
-name: Scraper — Sueldos ISPA
+﻿name: Scraper — Sueldos ISPA
 
 on:
   schedule:
