@@ -1,0 +1,36 @@
+name: Scraper — Contratos Diputación de Cádiz
+
+on:
+  schedule:
+    - cron: "30 6 * * *"   # 07:30 CET / 08:30 CEST (30 min después del PCSP)
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    name: Contratos Diputación de Cádiz
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run scraper Diputación de Cádiz
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scripts/scrapers/dipucadiz_contracts.py
+
+      - name: Revalidar caché de Vercel
+        if: ${{ secrets.REVALIDATE_SECRET != '' }}
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" -X POST \
+            -H "x-revalidate-secret: ${{ secrets.REVALIDATE_SECRET }}" \
+            https://el-bosque-transparente.vercel.app/api/revalidate
