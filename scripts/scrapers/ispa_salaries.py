@@ -32,7 +32,7 @@ from db import get_conn  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-MUNICIPALITY = "El Bosque"
+MUNICIPALITY = "Bosque, El"  # formato ISPA: apellido, nombre
 
 ISPA_EDITIONS = {
     2023: {
