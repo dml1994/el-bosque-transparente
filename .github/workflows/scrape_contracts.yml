@@ -1,4 +1,4 @@
-﻿name: Scraper — Contratos PCSP
+name: Scraper — Contratos PCSP
 
 on:
   schedule:
@@ -71,8 +71,11 @@ jobs:
         run: python scripts/scrapers/enrich_awarded_to.py
 
       - name: Revalidar caché de Vercel
-        if: ${{ secrets.REVALIDATE_SECRET != '' }}
+        env:
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
         run: |
-          curl -s -o /dev/null -w "%{http_code}" -X POST \
-            -H "x-revalidate-secret: ${{ secrets.REVALIDATE_SECRET }}" \
-            https://el-bosque-transparente.vercel.app/api/revalidate
+          if [ -n "$REVALIDATE_SECRET" ]; then
+            curl -s -o /dev/null -w "%{http_code}" -X POST \
+              -H "x-revalidate-secret: $REVALIDATE_SECRET" \
+              https://el-bosque-transparente.vercel.app/api/revalidate
+          fi
