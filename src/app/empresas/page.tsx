@@ -1,15 +1,15 @@
-export const revalidate = 3600;
+﻿export const revalidate = 3600;
 
 
 export const metadata = {
   title: "Empresas adjudicatarias",
   description:
     "Ranking de empresas que más contratos han recibido del Ayuntamiento de Ubrique, con importes totales y número de contratos.",
-  alternates: { canonical: "https://ubrique-transparente.vercel.app/empresas" },
+  alternates: { canonical: "https://el-bosque-transparente.vercel.app/empresas" },
   openGraph: {
-    title: "Empresas adjudicatarias — Ubrique Transparente",
+    title: "Empresas adjudicatarias — El Bosque Transparente",
     description: "Qué empresas reciben más contratos del Ayuntamiento de Ubrique y por qué importe.",
-    url: "https://ubrique-transparente.vercel.app/empresas",
+    url: "https://el-bosque-transparente.vercel.app/empresas",
   },
 };
 

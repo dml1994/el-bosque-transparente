@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ubrique-transparente.vercel.app"),
+  metadataBase: new URL("https://el-bosque-transparente.vercel.app"),
   title: {
-    default: "Ubrique Transparente",
-    template: "%s | Ubrique Transparente",
+    default: "El Bosque Transparente",
+    template: "%s | El Bosque Transparente",
   },
   description:
     "Portal de transparencia del Ayuntamiento de Ubrique (Cádiz). Consulta contratos públicos, retribuciones de cargos electos y presupuestos municipales con datos oficiales actualizados.",
@@ -14,20 +14,20 @@ export const metadata: Metadata = {
     "presupuesto municipal", "sueldos concejales", "cádiz", "andalucía",
     "plataforma contratación", "datos abiertos",
   ],
-  authors: [{ name: "Ubrique Transparente" }],
-  creator: "Ubrique Transparente",
+  authors: [{ name: "El Bosque Transparente" }],
+  creator: "El Bosque Transparente",
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://ubrique-transparente.vercel.app",
-    siteName: "Ubrique Transparente",
-    title: "Ubrique Transparente — Transparencia municipal",
+    url: "https://el-bosque-transparente.vercel.app",
+    siteName: "El Bosque Transparente",
+    title: "El Bosque Transparente — Transparencia municipal",
     description:
       "Contratos públicos, sueldos de cargos y presupuestos del Ayuntamiento de Ubrique. Datos oficiales actualizados diariamente.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ubrique Transparente",
+    title: "El Bosque Transparente",
     description:
       "Contratos públicos, sueldos y presupuestos del Ayuntamiento de Ubrique.",
   },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   alternates: {
-    canonical: "https://ubrique-transparente.vercel.app",
+    canonical: "https://el-bosque-transparente.vercel.app",
   },
 };
 
@@ -55,7 +55,7 @@ export default function RootLayout({
               <div className="w-7 h-7 bg-brand-600 rounded-lg flex items-center justify-center shrink-0">
                 <span className="text-white font-bold text-xs">UT</span>
               </div>
-              <span className="font-semibold text-gray-900 text-sm">Ubrique Transparente</span>
+              <span className="font-semibold text-gray-900 text-sm">El Bosque Transparente</span>
             </a>
             <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
               <a href="/contratos"   className="hover:text-brand-600 transition-colors">Contratos</a>

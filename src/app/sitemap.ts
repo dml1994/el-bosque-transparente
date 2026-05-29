@@ -1,6 +1,6 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 
-const BASE = "https://ubrique-transparente.vercel.app";
+const BASE = "https://el-bosque-transparente.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

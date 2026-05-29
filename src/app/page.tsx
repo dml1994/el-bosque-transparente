@@ -1,4 +1,4 @@
-import { getContractStats } from "@/lib/contracts";
+﻿import { getContractStats } from "@/lib/contracts";
 import { getCompanyStats } from "@/lib/companies";
 import { getBudgetYears, getBudgetStats } from "@/lib/budget";
 import { getSalaryYears, getSalaryStats } from "@/lib/salaries";
@@ -6,8 +6,8 @@ import { getSalaryYears, getSalaryStats } from "@/lib/salaries";
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Ubrique Transparente",
-  url: "https://ubrique-transparente.vercel.app",
+  name: "El Bosque Transparente",
+  url: "https://el-bosque-transparente.vercel.app",
   description:
     "Portal de transparencia del Ayuntamiento de Ubrique con datos de contratos, sueldos y presupuesto.",
   about: {
@@ -110,7 +110,7 @@ export default async function HomePage() {
         <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white/5" />
         <div className="absolute -bottom-12 -left-12 w-56 h-56 rounded-full bg-white/5" />
         <div className="relative z-10">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Ubrique Transparente</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">El Bosque Transparente</h1>
           <p className="text-brand-200 mt-2">
             Contratos, sueldos y presupuestos del Ayuntamiento de Ubrique.
           </p>

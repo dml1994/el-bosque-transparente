@@ -1,4 +1,4 @@
-"""
+﻿"""
 Scraper de presupuestos municipales de Ubrique desde Gobierto/Hacienda.
 
 Fuente: bubbles.json publicado en S3 por Gobierto, alimentado con los datos
@@ -62,7 +62,7 @@ def fetch_bubbles() -> list:
 
 def build_records(data: list, years: Optional[List[int]] = None) -> List[dict]:
     records = []
-    source_url = f"https://presupuestos.gobierto.es/municipios/ubrique"
+    source_url = f"https://presupuestos.gobierto.es/municipios/el-bosque"  # TODO: verificar municipio en Gobierto
 
     for item in data:
         category     = item.get("id", "")

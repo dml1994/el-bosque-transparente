@@ -1,7 +1,7 @@
-import { ImageResponse } from "next/og";
+﻿import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Ubrique Transparente — Portal de transparencia municipal";
+export const alt = "El Bosque Transparente — Portal de transparencia municipal";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -72,7 +72,7 @@ export default function OgImage() {
             UT
           </div>
           <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 28, fontWeight: 600 }}>
-            Ubrique Transparente
+            El Bosque Transparente
           </span>
         </div>
 

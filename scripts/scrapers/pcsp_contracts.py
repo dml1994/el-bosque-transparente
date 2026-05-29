@@ -1,5 +1,5 @@
-"""
-Scraper de contratos del Ayuntamiento de Ubrique desde la PCSP.
+﻿"""
+Scraper de contratos del Ayuntamiento de El Bosque desde la PCSP.
 
 Fuente: ZIPs de datos abiertos de la Plataforma de Contratación del Sector
 Público (https://contrataciondelsectorpublico.gob.es).
@@ -14,7 +14,7 @@ Estrategia por año:
   2. Si no existe (el servidor devuelve HTML en lugar de ZIP), busca ZIPs
      mensuales ({base}_{year}{mes:02d}.zip) — formato usado en 2025+.
   3. Itera los ficheros .atom dentro de cada ZIP sin extraerlos a disco.
-  4. Filtra entradas por NIF del Ayuntamiento de Ubrique (P1103800G).
+  4. Filtra entradas por NIF del Ayuntamiento de Ubrique (P1101000F).
   5. Upserta los contratos en Neon PostgreSQL.
 """
 
@@ -23,6 +23,7 @@ import zipfile
 import logging
 import sys
 import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Optional, List, Dict
 from xml.etree import ElementTree as ET
 
@@ -39,8 +40,8 @@ log = logging.getLogger(__name__)
 
 # ─── Constantes ──────────────────────────────────────────────────────────────
 
-UBRIQUE_NIF = "P1103800G"
-UBRIQUE_DIR3 = "L01110380"
+EL_BOSQUE_NIF = "P1101000F"  # TODO: verificar NIF en PCSP
+EL_BOSQUE_DIR3 = "L01110100"  # TODO: verificar DIR3 en PCSP
 
 # ZIPs de datos abiertos PCSP (actualizados diariamente)
 BASE_SINDICACION = "https://contrataciondelsectorpublico.gob.es/sindicacion"
@@ -141,8 +142,8 @@ def _text(el: Optional[ET.Element], *paths: str, ns=NS) -> Optional[str]:
     return None
 
 
-def _is_ubrique_entry(entry: ET.Element) -> bool:
-    """True si el Ayuntamiento de Ubrique (NIF P1103800G) es el órgano contratante.
+def _is_el_bosque_entry(entry: ET.Element) -> bool:
+    """True si el Ayuntamiento de Ubrique (NIF P1101000F) es el órgano contratante.
 
     El XML real de la PCSP usa LocatedContractingParty (no ContractingParty).
     Buscamos el NIF o DIR3 únicamente dentro de ese bloque por nombre local,
@@ -150,7 +151,7 @@ def _is_ubrique_entry(entry: ET.Element) -> bool:
     beneficiario de contratos de la Diputación u otras entidades.
     """
     cbc = "urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2"
-    IDENTIFIERS = (UBRIQUE_NIF, UBRIQUE_DIR3)
+    IDENTIFIERS = (EL_BOSQUE_NIF, EL_BOSQUE_DIR3)
 
     NAME_TAGS = {"Name", "CityName", "RegistrationName"}
 
@@ -161,7 +162,7 @@ def _is_ubrique_entry(entry: ET.Element) -> bool:
                 text = child.text or ""
                 if local == "ID" and any(ident in text for ident in IDENTIFIERS):
                     return True
-                if local in NAME_TAGS and "Ubrique" in text:
+                if local in NAME_TAGS and "El Bosque" in text:
                     return True
     return False
 
@@ -181,7 +182,7 @@ def _parse_awarded_to(entry: ET.Element) -> Optional[str]:
 def _parse_awarded_to_nif(entry: ET.Element) -> Optional[str]:
     """Extrae el NIF/CIF de la empresa adjudicataria desde TenderResult/WinningParty."""
     cbc = "urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2"
-    AYTO_NIFS = {UBRIQUE_NIF, UBRIQUE_DIR3}
+    AYTO_NIFS = {EL_BOSQUE_NIF, EL_BOSQUE_DIR3}
 
     for el in entry.iter():
         if el.tag.split("}")[-1] == "WinningParty":
@@ -275,7 +276,7 @@ def parse_entry(entry: ET.Element, feed_type: str) -> Optional[dict]:
 # ─── Procesado de ZIP ─────────────────────────────────────────────────────────
 
 def process_zip(zip_bytes: bytes, feed_type: str) -> List[Dict]:
-    """Itera los ficheros .atom en el ZIP y extrae contratos de Ubrique."""
+    """Itera los ficheros .atom en el ZIP y extrae contratos de El Bosque."""
     contracts = []
     with zipfile.ZipFile(io.BytesIO(zip_bytes)) as zf:
         atom_files = [n for n in zf.namelist() if n.endswith(".atom")]
@@ -292,12 +293,12 @@ def process_zip(zip_bytes: bytes, feed_type: str) -> List[Dict]:
                 root = tree.getroot()
                 atom_ns = "http://www.w3.org/2005/Atom"
                 for entry in root.findall(f"{{{atom_ns}}}entry"):
-                    if _is_ubrique_entry(entry):
+                    if _is_el_bosque_entry(entry):
                         parsed = parse_entry(entry, feed_type)
                         if parsed:
                             contracts.append(parsed)
 
-    log.info("  %d contratos de Ubrique encontrados", len(contracts))
+    log.info("  %d contratos de El Bosque encontrados", len(contracts))
     return contracts
 
 # ─── Persistencia ─────────────────────────────────────────────────────────────
@@ -364,7 +365,7 @@ def run(years: Optional[List[int]] = None, feeds: Optional[List[str]] = None):
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="Scraper contratos PCSP — Ubrique")
+    parser = argparse.ArgumentParser(description="Scraper contratos PCSP — El Bosque")
     parser.add_argument("--years", nargs="+", type=int, default=None,
                         help="Años a procesar (por defecto: año actual)")
     parser.add_argument("--feeds", nargs="+", choices=list(FEEDS.keys()), default=None,

@@ -1,4 +1,4 @@
-"""Diagnóstico de cobertura de ZIPs de la PCSP por año.
+﻿"""Diagnóstico de cobertura de ZIPs de la PCSP por año.
 
 Fase 1 (rápida, sin descargas): descubre si existen múltiples ZIPs por año
         probando variantes de URL (_N, _0N, _año_N …).
@@ -22,9 +22,9 @@ FEED_BASES = {
 }
 ATOM_NS      = "http://www.w3.org/2005/Atom"
 CBC          = "urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2"
-UBRIQUE_NIF  = "P1103800G"
-UBRIQUE_DIR3 = "L01110380"
-IDENTIFIERS  = (UBRIQUE_NIF, UBRIQUE_DIR3)
+EL_BOSQUE_NIF  = "P1101000F"
+EL_BOSQUE_DIR3 = "L01110100"
+IDENTIFIERS  = (EL_BOSQUE_NIF, EL_BOSQUE_DIR3)
 CURRENT_YEAR = datetime.date.today().year
 
 

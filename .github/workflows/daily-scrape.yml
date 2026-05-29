@@ -1,4 +1,4 @@
-name: Daily contracts scrape
+﻿name: Daily contracts scrape
 
 on:
   schedule:
@@ -7,8 +7,13 @@ on:
 
 jobs:
   scrape:
+    name: "[${{ matrix.feed }}] Scrape contratos"
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      matrix:
+        feed: [licitaciones, agregacion, menores]
+      fail-fast: false     # si falla un feed no cancela los otros
 
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +27,7 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Run PCSP contracts scraper
+      - name: Run PCSP contracts scraper — ${{ matrix.feed }}
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: python scripts/scrapers/pcsp_contracts.py
+        run: python scripts/scrapers/pcsp_contracts.py --feeds ${{ matrix.feed }}
