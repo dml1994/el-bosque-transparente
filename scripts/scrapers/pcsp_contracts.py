@@ -1,4 +1,4 @@
-﻿"""
+"""
 Scraper de contratos del Ayuntamiento de El Bosque desde la PCSP.
 
 Fuente: ZIPs de datos abiertos de la Plataforma de Contratación del Sector

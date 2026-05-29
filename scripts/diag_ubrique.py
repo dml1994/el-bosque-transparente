@@ -1,4 +1,4 @@
-﻿"""Diagnóstico de cobertura de ZIPs de la PCSP por año.
+"""Diagnóstico de cobertura de ZIPs de la PCSP por año.
 
 Fase 1 (rápida, sin descargas): descubre si existen múltiples ZIPs por año
         probando variantes de URL (_N, _0N, _año_N …).

@@ -1,4 +1,4 @@
-﻿import { getContractStats } from "@/lib/contracts";
+import { getContractStats } from "@/lib/contracts";
 import { getCompanyStats } from "@/lib/companies";
 import { getBudgetYears, getBudgetStats } from "@/lib/budget";
 import { getSalaryYears, getSalaryStats } from "@/lib/salaries";

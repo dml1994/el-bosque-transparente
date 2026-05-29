@@ -1,4 +1,4 @@
-﻿import { ImageResponse } from "next/og";
+import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 export const alt = "El Bosque Transparente — Portal de transparencia municipal";

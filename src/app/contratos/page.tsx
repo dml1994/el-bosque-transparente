@@ -1,4 +1,4 @@
-﻿export const revalidate = 3600; // 1 hora en CDN
+export const revalidate = 3600; // 1 hora en CDN
 
 
 export const metadata = {

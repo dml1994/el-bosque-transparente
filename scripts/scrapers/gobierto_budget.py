@@ -1,4 +1,4 @@
-﻿"""
+"""
 Scraper de presupuestos municipales de Ubrique desde Gobierto/Hacienda.
 
 Fuente: bubbles.json publicado en S3 por Gobierto, alimentado con los datos

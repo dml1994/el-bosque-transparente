@@ -1,4 +1,4 @@
-﻿export const revalidate = 86400; // 24 horas (datos cambian raramente)
+export const revalidate = 86400; // 24 horas (datos cambian raramente)
 
 
 export const metadata = {
