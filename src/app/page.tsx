@@ -3,6 +3,8 @@ import { getCompanyStats } from "@/lib/companies";
 import { getBudgetYears, getBudgetStats } from "@/lib/budget";
 import { getSalaryYears, getSalaryStats } from "@/lib/salaries";
 
+export const revalidate = 3600; // refresca la home cada hora
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
