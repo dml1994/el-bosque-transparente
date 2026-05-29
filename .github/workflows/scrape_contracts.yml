@@ -69,3 +69,10 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python scripts/scrapers/enrich_awarded_to.py
+
+      - name: Revalidar caché de Vercel
+        if: ${{ secrets.REVALIDATE_SECRET != '' }}
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" -X POST \
+            -H "x-revalidate-secret: ${{ secrets.REVALIDATE_SECRET }}" \
+            https://el-bosque-transparente.vercel.app/api/revalidate
