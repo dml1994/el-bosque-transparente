@@ -1,5 +1,5 @@
 """
-Scraper de contratos del Ayuntamiento de El Bosque desde la PCSP.
+Scraper de contratos del Ayuntamiento de Ubrique desde la PCSP.
 
 Fuente: ZIPs de datos abiertos de la Plataforma de Contratación del Sector
 Público (https://contrataciondelsectorpublico.gob.es).
@@ -14,7 +14,7 @@ Estrategia por año:
   2. Si no existe (el servidor devuelve HTML en lugar de ZIP), busca ZIPs
      mensuales ({base}_{year}{mes:02d}.zip) — formato usado en 2025+.
   3. Itera los ficheros .atom dentro de cada ZIP sin extraerlos a disco.
-  4. Filtra entradas por NIF del Ayuntamiento de Ubrique (P1101000F).
+  4. Filtra entradas por NIF del Ayuntamiento de Ubrique (P1103800G).
   5. Upserta los contratos en Neon PostgreSQL.
 """
 
@@ -49,13 +49,11 @@ BASE_SINDICACION = "https://contrataciondelsectorpublico.gob.es/sindicacion"
 # Base de cada feed (sin sufijo _{periodo}.zip)
 FEEDS = {
     "licitaciones": f"{BASE_SINDICACION}/sindicacion_643/licitacionesPerfilesContratanteCompleto3",
-    "agregacion":   f"{BASE_SINDICACION}/sindicacion_1044/PlataformasAgregadasSinMenores",
     "menores":      f"{BASE_SINDICACION}/sindicacion_1143/contratosMenoresPerfilesContratantes",
 }
 
 FEED_STATUS = {
     "licitaciones": "awarded",
-    "agregacion":   "awarded",
     "menores":      "awarded",
 }
 
@@ -143,13 +141,7 @@ def _text(el: Optional[ET.Element], *paths: str, ns=NS) -> Optional[str]:
 
 
 def _is_el_bosque_entry(entry: ET.Element) -> bool:
-    """True si el Ayuntamiento de Ubrique (NIF P1101000F) es el órgano contratante.
-
-    El XML real de la PCSP usa LocatedContractingParty (no ContractingParty).
-    Buscamos el NIF o DIR3 únicamente dentro de ese bloque por nombre local,
-    para no confundir con entradas donde Ubrique aparece como municipio
-    beneficiario de contratos de la Diputación u otras entidades.
-    """
+    """True si el Ayuntamiento de El Bosque (NIF P1101100D) es el órgano contratante."""
     cbc = "urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2"
     IDENTIFIERS = (EL_BOSQUE_NIF, EL_BOSQUE_DIR3)
 

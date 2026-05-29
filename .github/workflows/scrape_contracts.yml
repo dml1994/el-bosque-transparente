@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 360
     strategy:
       matrix:
-        feed: [licitaciones, agregacion, menores]
+        feed: [licitaciones, menores]
       fail-fast: false
 
     steps:

@@ -38,7 +38,7 @@ jobs:
     strategy:
       matrix:
         year: ${{ fromJson(needs.prepare.outputs.years) }}
-        feed: [licitaciones, agregacion, menores]
+        feed: [licitaciones, menores]
       fail-fast: false
 
     steps:
