@@ -339,25 +339,46 @@ def save_contracts(contracts: List[Dict]) -> int:
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
-def run(years: Optional[List[int]] = None, feeds: Optional[List[str]] = None):
+def _process_feed_year(feed_type: str, base_url: str, year: int) -> int:
+    """Descarga, parsea y guarda todos los ZIPs de un feed+año. Devuelve contratos guardados."""
+    urls = get_zip_urls(base_url, year)
+    saved = 0
+    for url in urls:
+        try:
+            zip_bytes = download_zip(url)
+            contracts = process_zip(zip_bytes, feed_type)
+            saved += save_contracts(contracts)
+            log.info("[%s/%d] %s → %d contratos guardados", feed_type, year, url, saved)
+        except Exception as e:
+            log.error("Error procesando %s: %s", url, e, exc_info=True)
+    return saved
+
+
+def run(years: Optional[List[int]] = None, feeds: Optional[List[str]] = None) -> int:
     if years is None:
         years = [datetime.date.today().year]
 
     active_feeds = {k: v for k, v in FEEDS.items() if feeds is None or k in feeds}
 
+    tasks = [
+        (feed_type, base_url, year)
+        for year in years
+        for feed_type, base_url in active_feeds.items()
+    ]
+
     total = 0
-    for year in years:
-        for feed_type, base_url in active_feeds.items():
-            urls = get_zip_urls(base_url, year)
-            for url in urls:
-                try:
-                    zip_bytes = download_zip(url)
-                    contracts = process_zip(zip_bytes, feed_type)
-                    saved = save_contracts(contracts)
-                    total += saved
-                    log.info("[%s] %s → %d contratos guardados", feed_type, url, saved)
-                except Exception as e:
-                    log.error("Error procesando %s: %s", url, e, exc_info=True)
+    max_workers = min(len(tasks), 6)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {
+            executor.submit(_process_feed_year, ft, url, yr): (ft, yr)
+            for ft, url, yr in tasks
+        }
+        for future in as_completed(futures):
+            feed_type, year = futures[future]
+            try:
+                total += future.result()
+            except Exception as e:
+                log.error("Error en feed=%s año=%d: %s", feed_type, year, e, exc_info=True)
 
     log.info("=== Total: %d contratos upsertados ===", total)
     return total
