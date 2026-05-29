@@ -1,5 +1,5 @@
 """
-Scraper de presupuestos municipales de Ubrique desde Gobierto/Hacienda.
+Scraper de presupuestos municipales de El Bosque desde Gobierto/Hacienda.
 
 Fuente: bubbles.json publicado en S3 por Gobierto, alimentado con los datos
 que los ayuntamientos remiten al Ministerio de Hacienda (CONPREL).
@@ -27,7 +27,7 @@ from db import get_conn  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-INE_CODE   = "11038"   # Ubrique (Cádiz)
+INE_CODE   = "11011"   # El Bosque (Cádiz)
 BUBBLES_URL = (
     f"https://gobierto-populate-production.s3.eu-west-1.amazonaws.com"
     f"/gobierto_budgets/{INE_CODE}/data/bubbles.json"
@@ -113,7 +113,7 @@ def run(years: Optional[List[int]] = None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Scraper presupuestos Ubrique desde Gobierto")
+    parser = argparse.ArgumentParser(description="Scraper presupuestos El Bosque desde Gobierto")
     parser.add_argument("--years", nargs="+", type=int, default=None,
                         help="Años a cargar (por defecto: todos disponibles)")
     args = parser.parse_args()
