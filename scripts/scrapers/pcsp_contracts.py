@@ -40,8 +40,8 @@ log = logging.getLogger(__name__)
 
 # ─── Constantes ──────────────────────────────────────────────────────────────
 
-EL_BOSQUE_NIF = "P1101000F"  # TODO: verificar NIF en PCSP
-EL_BOSQUE_DIR3 = "L01110100"  # TODO: verificar DIR3 en PCSP
+EL_BOSQUE_NIF = "P1101100D"  # INE 11011 — verificar si hay contratos
+EL_BOSQUE_DIR3 = "L01110110"  # TODO: verificar DIR3 en PCSP
 
 # ZIPs de datos abiertos PCSP (actualizados diariamente)
 BASE_SINDICACION = "https://contrataciondelsectorpublico.gob.es/sindicacion"
